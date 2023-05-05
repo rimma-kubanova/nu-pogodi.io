@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport", content="width=device-width, initial-scale=1.0">
+        <title>Pong</title>
+        <link rel="stylesheet" href="nupogodi.css">
+        <script src="wolf.js"></script>
+    </head>
+    <body>
+        <div id="game-over" class="hidden">
+            <h1>Game Over</h1>
+            <button id="restart-btn">Restart</button>
+          </div>
+          <div id="backgroundintro" class ="hidden"></div>
+            <div id="rectangle">
+                <div class="radio-container">
+                    <label class="radio-label">Easy</label>
+                    <input type="radio" name="difficulty" value="easy" required>
+                    <label class="radio-label">Normal</label>
+                    <input type="radio" name="difficulty" value="normal" required>
+                    <label class="radio-label">Standard</label>
+                    <input type="radio" name="difficulty" value="standard" required>
+                    <label class="radio-label">Extreme</label>
+                    <input type="radio" name="difficulty" value="extreme" required checked>
+                </div>
+                <button class = "button" onclick="start()" id="start-button">Start</button>
+            </div>
+
+        <canvas id="board"></canvas>
+        <div id="egg"></div>
+    </body>
+</html>
