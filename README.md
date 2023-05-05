@@ -8,6 +8,7 @@ This is the recreation of classic game called Nu-Pogodi for Nfactorial.
 
 
 The program is implemented through **index.html,** **nupogodi.css** and **wolf.js **as a web game.
+**Better works with Google Chrome!**
 
 <img width="519" alt="Screenshot 2023-05-05 at 22 33 27" src="https://user-images.githubusercontent.com/115300909/236515555-c295c515-0514-42a9-aa0e-12d35f51028b.png">
 
