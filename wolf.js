@@ -73,6 +73,7 @@ const losesound = new Audio('sounds/cowboy_dead.wav');
 const pashalka = new Audio('sounds/pogodi.mp3');
 const konec = new Audio('sounds/koncovvk.mp3');
 
+//when page loads
 window.onload = function() {
     const rectangle = document.getElementById("rectangle");
     const startButton = document.getElementById("start-button");
@@ -103,20 +104,20 @@ window.onload = function() {
     startButton.style.display = "block";
 
 }
-
+//button start
 function start(){
     board = document.getElementById("board");
     board.height = boardHeight;
     board.width = boardWidth;
     context = board.getContext("2d"); //used for drawing on the board
 
-    //draw initial player
+    //draws the busket
     playerImg = new Image();
     playerImg.src = "images/down.png";
     playerImg.onload = function() {
         context.drawImage(playerImg, player.x, player.y, player.width, player.height);
     }
-
+//creates the player
     wolf = document.createElement('div');
     wolf.style.width = 100+"px";
     wolf.style.height = 200+"px";
@@ -134,6 +135,8 @@ function start(){
 
 }
 
+
+//this function is active when the player touches the freezer egg
 function FreezePlayer(){
     if(FreezeThePlayer){
 
@@ -158,6 +161,7 @@ function FreezePlayer(){
     }
 }
 
+//creates the rabbit
 function createrabbit(){
 
     if(losepoint>3){
@@ -192,6 +196,8 @@ let FreezerEggSpawned=false;
 let FreezeThePlayer=false;
 let stopMoving = false;
 
+
+//spawns egg
 function createEgg() {
     const eggs = [];
     let eggFrequency=3000;
@@ -219,6 +225,7 @@ function createEgg() {
    // egg.style.backgroundColor = "red";
     egg.style.position = "absolute";
 
+        //in extreme mode, the game randomly spawns the freezer egg
     if(extremeMode){
         setInterval(function(){
             eggFrequency-=100;
@@ -232,6 +239,7 @@ function createEgg() {
 }
     let randomNumber = Math.floor(Math.random() * 4) + 1;
   
+        //in easy mode, only 2 roads work
     if(easyMode){
         if(losepoint<=1.5){
         randomNumber = Math.floor(Math.random() * 2) + 1;
@@ -241,6 +249,7 @@ function createEgg() {
     }else
         randomNumber = Math.random() < 0.5 ? 2 : 4;
 
+        //in normal mode, only 3 roads work
     }else if(normalMode){
         if (losepoint === 0) {
             while (randomNumber === 2){
@@ -286,6 +295,7 @@ function createEgg() {
   
     let count = 0;
 
+        //moves the egg
     const intervalId = setInterval(() => {
         if(losepoint>3){
             return;
@@ -300,7 +310,7 @@ function createEgg() {
         count++;
   
         if (count === 5) {
-            if(checkifcontact(randomNumber)){
+            if(checkifcontact(randomNumber)){ // when the busket catches the egg
                 catching.play();
                 clearInterval(intervalId);
                 egg.remove(); 
@@ -341,7 +351,7 @@ function createEgg() {
                 egg.style.top=window.innerHeight/2+145 + "px";
                 egg.style.left=window.innerWidth/2+260-100-eggWidth/2 + "px";
         }
-        clearInterval(intervalId);
+        clearInterval(intervalId); //when the busket does not catch the egg
         setTimeout(function(){
         egg.remove();
         },1000);
@@ -398,7 +408,7 @@ function createEgg() {
     let eggspawn = setInterval(spawnEgg, eggFrequency);
   }
 
-  function checkifcontact(a) {
+  function checkifcontact(a) { //checks if bucket catched the egg
     if(losepoint>3){
         return;
     }
@@ -416,7 +426,7 @@ function createEgg() {
 let isBlinking=false;
 let chickens=[];
 
-function createchicken(losepoint, randomNumber){
+function createchicken(losepoint, randomNumber){ //creates chicken
 
     if(score === 200 || score === 500){
         for(let i=0;i<chickens.length;i++){
@@ -474,7 +484,7 @@ function Blinkchicken(chicken){
   }, 500);
 }
 
-function RunningChick(randomNumber){
+function RunningChick(randomNumber){ //creates the chicken that runs away
 
     if(losepoint>3){
         return;
@@ -518,7 +528,7 @@ function RunningChick(randomNumber){
 
 let playerImg;
 
-function update() {
+function update() { //updates the canvas
     requestAnimationFrame(update);
 
     if(losepoint>3){
@@ -536,7 +546,7 @@ function update() {
     context.fillText(score, 400, 110);
 }
 
-function movePlayer(e) {
+function movePlayer(e) { //controls the w,a,s and d keys
     
     if(losepoint>3){
         return;
@@ -597,7 +607,7 @@ function movePlayer(e) {
 
 }
 
-function gameover(){
+function gameover(){ //gameover
     losesound.play();
     const gameOverScreen = document.getElementById('game-over');
     gameOverScreen.classList.remove('hidden');
